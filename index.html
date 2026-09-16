@@ -951,7 +951,8 @@ button { font: inherit; background: none; border: none; }
        target="_blank"
        rel="noopener noreferrer"
        class="btn btn-primary"
-       data-magnetic>
+       data-magnetic
+       onclick="window.open(this.href, '_blank', 'noopener,noreferrer'); return false;">
       <span>Open PDF</span><span class="arrow">→</span>
     </a>
   </div>
