@@ -943,16 +943,7 @@ button { font: inherit; background: none; border: none; }
 
 </main>
 
-<!-- Resume Modal -->
-<div class="modal-overlay" id="resumeModal">
-  <div class="modal-box">
-    <button class="modal-close" id="closeModalBtn" data-magnetic aria-label="Close resume modal">[ CLOSE ]</button>
-    <p class="eyebrow">FIG. 0.1 — RÉSUMÉ</p>
-    <h3>Manish Tungariya</h3>
-    <p class="modal-text">Drop your résumé PDF into the <code>assets/</code> folder as <code>resume.pdf</code> and this link will open it directly.</p>
-    <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-magnetic><span>Open PDF</span><span class="arrow">→</span></a>
-  </div>
-</div>
+<!-- Resume opens directly from the public Google Drive link above -->
 
 <!-- External dependency: GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -1208,33 +1199,7 @@ function prepStroke(el) {
 })();
 
 
-/* ===== Resume modal ===== */
-(function initModal() {
-
-  const modal = document.getElementById('resumeModal');
-  const openBtn = document.getElementById('viewResumeBtn');
-  const closeBtn = document.getElementById('closeModalBtn');
-
-  function open() {
-    modal.classList.add('open');
-  }
-
-  function close() {
-    modal.classList.remove('open');
-  }
-
-  openBtn.addEventListener('click', open);
-  closeBtn.addEventListener('click', close);
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) close();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') close();
-  });
-
-})();
+/* ===== Resume modal disabled: hero button opens the Drive résumé directly ===== */
 
 
 /* ===== Footer year ===== */
