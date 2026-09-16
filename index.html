@@ -630,6 +630,48 @@ button { font: inherit; background: none; border: none; }
 .modal-text { color: var(--paper-dim); font-size: 14px; line-height: 1.7; margin-bottom: 26px; }
 .modal-text code { color: var(--amber); font-family: var(--font-mono); }
 
+
+/* ========== Project detail presentation ========== */
+.project-tech {
+  font-family: var(--font-mono);
+  color: var(--amber-light);
+  font-size: 11px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.project-bullets {
+  margin: 0 0 18px 18px;
+  color: var(--paper-dim);
+  font-size: 13px;
+  line-height: 1.65;
+  max-width: 780px;
+}
+
+.project-bullets li {
+  margin-bottom: 8px;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--amber-light);
+}
+
+.project-stack span {
+  border: 1px solid rgba(232,116,59,0.28);
+  padding: 5px 8px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.project-stack span:hover {
+  background: rgba(232,116,59,0.10);
+  border-color: var(--amber);
+}
+
 </style>
 </head>
 <body>
@@ -768,30 +810,26 @@ button { font: inherit; background: none; border: none; }
       <p class="eyebrow reveal-up">FIG. 3 — BUILT SYSTEMS</p>
       <h2 class="section-heading reveal-up narrow">Selected schematics</h2>
       <div class="project-list">
+          
           <article class="project-row reveal-up" data-magnetic>
             <div class="project-fig">FIG. 3.1</div>
+
             <div class="project-body">
               <div class="project-kicker">Agentic AI · Production Systems · 2026</div>
-              <h3>DispatchDesk — AI Customer Support Agent</h3>
-              <p>
-                Production-oriented agentic customer support system built with LangGraph and FastAPI,
-                combining intent-based tool routing, grounded RAG, deterministic business rules,
-                authentication, semantic caching, and human-in-the-loop controls.
+              <h3>DispatchDesk — AI Customer Support Agent — GitHub 2026</h3>
+
+              <p class="project-tech">
+                Python · LangGraph · FastAPI · Redis · Chroma · Pydantic · SQLite · JWT · bcrypt · Docker
               </p>
 
-              <div class="project-highlights">
-                <div class="metric"><span class="metric-number">4</span><span class="metric-label">Agent tools</span></div>
-                <div class="metric"><span class="metric-number">~87%</span><span class="metric-label">p95 latency reduction on cache hits</span></div>
-                <div class="metric"><span class="metric-number">20–27%</span><span class="metric-label">LLM cost reduction</span></div>
-              </div>
-
               <ul class="project-bullets">
-                <li><strong>Routing:</strong> dynamically routes queries across order lookup, RAG Q&amp;A, refund initiation, and escalation.</li>
-                <li><strong>Grounding:</strong> uses a 10-document policy corpus with Chroma vector search and validation across a 30-case test suite.</li>
-                <li><strong>Performance:</strong> Redis semantic caching reduced p95 policy-lookup latency from ~600ms to ~80ms on cache hits.</li>
-                <li><strong>Security:</strong> FastAPI, OAuth2 JWT, bcrypt, and RBAC restrict refund approval to supervisor roles.</li>
-                <li><strong>Reliability:</strong> deterministic SQLite/ACID refund rules enforce idempotency; duplicate refunds were eliminated and verified with a 6-case pytest suite.</li>
-                <li><strong>Deployment:</strong> Dockerized stack with Pydantic-validated schemas across 5 REST endpoints and environment-based secrets.</li>
+                <li>Built a LangGraph + FastAPI support system that dynamically routes user queries across 4 tools (order lookup, RAG Q&amp;A, refund initiation, escalation) based on intent classification.</li>
+                <li>Reduced ungrounded policy answers by grounding responses in a 10-document policy corpus via Chroma vector search, validated across a 30-case test suite.</li>
+                <li>Engineered a Redis-backed semantic cache that cut p95 policy-lookup latency from ∼600ms to ∼80ms on cache hits (cache misses re-populate the cache for subsequent calls), by serving cached responses before triggering OpenAI embedding + Chroma vector search.</li>
+                <li>Reduced LLM cost per query by ∼20–27% (from ∼$0.00075 to ∼$0.00055 per query at GPT-4o-mini rates, based on 1K simulated queries) by reusing cached context to skip redundant embedding and completion calls on repeated policy-intent queries.</li>
+                <li>Secured the API (FastAPI, JWT, bcrypt, RBAC) by replacing plaintext auth with OAuth2 JWT + role-based access, locking refund-approval endpoints to supervisor-only roles.</li>
+                <li>Moved refund-approval business rules out of the LLM prompt into deterministic, transactional code (SQLite, ACID), enforcing idempotency and eliminating duplicate refunds — verified with a 6-case pytest suite.</li>
+                <li>Containerized the full stack with Docker and Pydantic-validated schemas across 5 REST endpoints, enabling one-command local deployment with environment-based secrets.</li>
               </ul>
 
               <div class="project-stack">
@@ -800,6 +838,7 @@ button { font: inherit; background: none; border: none; }
                 <span>bcrypt</span><span>Docker</span>
               </div>
             </div>
+
             <a class="project-link" href="https://github.com/manish-msicode" target="_blank" rel="noopener noreferrer" data-magnetic>
               GITHUB <span class="arrow">→</span>
             </a>
@@ -807,37 +846,32 @@ button { font: inherit; background: none; border: none; }
 
           <article class="project-row reveal-up" data-magnetic>
             <div class="project-fig">FIG. 3.2</div>
+
             <div class="project-body">
               <div class="project-kicker">RAG · Evaluation · Enterprise Q&amp;A · 2026</div>
-              <h3>Corrective RAG (CRAG) Pipeline for Enterprise Q&amp;A</h3>
-              <p>
-                Corrective RAG pipeline that evaluates retrieved evidence before generation,
-                gates context by document relevance, compresses ambiguous evidence, and
-                benchmarks corrected versus uncorrected answers with an independent LLM judge.
+              <h3>Corrective RAG (CRAG) Pipeline for Enterprise Q&amp;A — GitHub 2026</h3>
+
+              <p class="project-tech">
+                Python · LangChain · FAISS · OpenAI API · FastAPI
               </p>
 
-              <div class="project-highlights">
-                <div class="metric"><span class="metric-number">3-way</span><span class="metric-label">Relevance gating</span></div>
-                <div class="metric"><span class="metric-number">2-path</span><span class="metric-label">Evaluation harness</span></div>
-                <div class="metric"><span class="metric-number">LLM</span><span class="metric-label">Context compression</span></div>
-              </div>
-
               <ul class="project-bullets">
-                <li><strong>Pipeline repair:</strong> fixed a defect where relevance scoring was computed but never influenced generation.</li>
-                <li><strong>Evidence gating:</strong> classifies every retrieved document as relevant, ambiguous, or irrelevant and determines the context passed to the LLM.</li>
-                <li><strong>Evaluation:</strong> generates corrected and uncorrected answers from the same retrieval call and benchmarks groundedness and relevance with an independent LLM judge.</li>
-                <li><strong>Compression:</strong> distills ambiguous documents into query-relevant spans before generation, reducing context noise while improving answer specificity.</li>
+                <li>Diagnosed and resolved a critical pipeline defect where document-relevance scoring was computed but never influenced the generation step, then re-architected a single gating function that grades every retrieved document (relevant / ambiguous / irrelevant) and directly determines the context passed to the LLM.</li>
+                <li>Built a dual-path evaluation harness that generates corrected and uncorrected answers from the same retrieval call and benchmarks both via an independent LLM-judge on groundedness and relevance, delivering a reproducible before/after quality metric on every run.</li>
+                <li>Implemented an LLM-based context compression step to distill ambiguous retrieved documents down to their query-relevant spans prior to generation, improving answer specificity while reducing noise in the context window.</li>
               </ul>
 
               <div class="project-stack">
                 <span>Python</span><span>LangChain</span><span>FAISS</span>
-                <span>OpenAI API</span><span>FastAPI</span><span>RAG</span><span>LLM Evaluation</span>
+                <span>OpenAI API</span><span>FastAPI</span>
               </div>
             </div>
+
             <a class="project-link" href="https://github.com/dhawanjunior/Corrective-RAG-" target="_blank" rel="noopener noreferrer" data-magnetic>
               GITHUB <span class="arrow">→</span>
             </a>
           </article>
+
 </div>
       
     </div>
